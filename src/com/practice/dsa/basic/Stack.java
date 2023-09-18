@@ -44,5 +44,13 @@ public class Stack {
         System.out.println(s.isEmpty());
         System.out.println(s.size());
         System.out.println(s.pop());// No such Element exception thrown
+
+        //JAVA 's Stack class
+        java.util.Stack<Integer> st = new java.util.Stack<>();
+        st.push(1);
+        st.peek();
+        st.pop();
+        st.size();
+        st.empty();
     }
 }
