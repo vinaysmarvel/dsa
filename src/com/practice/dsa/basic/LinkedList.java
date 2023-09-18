@@ -120,5 +120,30 @@ public class LinkedList {
         sll.traverse();
         sll.deleteInTheMiddle(8);
         sll.traverse();
+
+        //JAVA s inbuilt linked list
+        // Creating object of the
+        // class linked list
+        java.util.LinkedList<String> ll = new java.util.LinkedList<String>();
+
+         //Adding elements to the linked list
+        ll.add("A");
+        ll.add("B");
+        ll.addLast("C");
+        ll.addFirst("D");
+        ll.add(2, "E");
+
+        System.out.println(ll);
+        System.out.println(ll.size());
+        System.out.println(ll.peek());
+        System.out.println(ll.peekFirst());
+        System.out.println(ll.peekLast());
+
+        ll.remove("B");
+        ll.remove(3);
+        ll.removeFirst();
+        ll.removeLast();
+
+        System.out.println(ll);
     }
 }
