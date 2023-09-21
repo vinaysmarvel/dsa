@@ -10,7 +10,7 @@ public class Heap {
     public Heap(int capacity) {
         this.capacity = capacity;
         this.arr = new int[capacity];
-        this.count =0;
+        this.count = 0;
     }
 
     public int getSize() {
@@ -31,51 +31,49 @@ public class Heap {
     }
 
     private int getLeftchild(int i) {
-        if (count >= 0 && (2 * i + 1) / 2 < count) return (2 * i + 1) / 2;
+        if (count >= 0 && (2 * i + 1) < count) return (2 * i + 1);
         else return -1;
     }
 
     private int getRightchild(int i) {
-        if (count >= 0 && (2 * i + 2) / 2 < count) return (2 * i + 2) / 2;
+        if (count >= 0 && (2 * i + 2) < count) return (2 * i + 2);
         else return -1;
     }
 
     private void percolateDown(int i) {
-        if(this.count -1 >= i && i>=0) {
+        if (this.count - 1 >= i && i >= 0) {
             int lc = getLeftchild(i);
             int rc = getRightchild(i);
-            int lcv =  lc== -1?Integer.MAX_VALUE:arr[lc];
-            int rcv =  rc== -1?Integer.MAX_VALUE:arr[rc];
-            while(arr[i]>Math.min(lcv,rcv)) {
-                int temp  = arr[i];
-                if(lcv < rcv ){
+            int lcv = lc == -1 ? Integer.MAX_VALUE : arr[lc];
+            int rcv = rc == -1 ? Integer.MAX_VALUE : arr[rc];
+            while (arr[i] > Math.min(lcv, rcv)) {
+                int temp = arr[i];
+                if (lcv < rcv) {
                     arr[i] = lcv;
-                    arr[lc]= temp;
-                    i=getLeftchild(i);
-                }
-                else{
+                    arr[lc] = temp;
+                    i = getLeftchild(i);
+                } else {
                     arr[i] = rcv;
-                    arr[rc]= temp;
-                    i=getRightchild(i);
+                    arr[rc] = temp;
+                    i = getRightchild(i);
                 }
                 lc = getLeftchild(i);
                 rc = getRightchild(i);
-                lcv =  lc== -1?Integer.MAX_VALUE:arr[lc];
-                rcv =  rc== -1?Integer.MAX_VALUE:arr[rc];
+                lcv = lc == -1 ? Integer.MAX_VALUE : arr[lc];
+                rcv = rc == -1 ? Integer.MAX_VALUE : arr[rc];
             }
-
         }
     }
 
     private void percolateUp(int i) {
-        if(this.count-1 >= i) {
+        if (this.count - 1 >= i) {
             int x = getParent(i);
-            while(arr[x] > arr[i]) {
+            while (arr[x] > arr[i]) {
                 int temp = arr[i];
                 arr[i] = arr[x];
-                arr[x]= temp;
-                i=x;
-                x=getParent(i);
+                arr[x] = temp;
+                i = x;
+                x = getParent(i);
             }
         }
     }
@@ -96,8 +94,18 @@ public class Heap {
         percolateUp(this.count - 1);
     }
 
-    public void display(){
+    public void display() {
         System.out.println(Arrays.toString(this.arr));
+    }
+
+    public static void buildHeap(Heap h, int[] a) {
+        if (h.capacity >= a.length) {
+            h.arr = Arrays.copyOf(a, h.arr.length);
+            h.count = a.length;
+            for (int i = (h.count - 1) / 2; i >= 0; i--) {
+                h.percolateDown(i);
+            }
+        }
     }
 
 
@@ -117,5 +125,11 @@ public class Heap {
         h.display();
         System.out.println(h.getSize());
         System.out.println(h.isEmpty());
+
+        int[] b = {10, 7, 9, 3, 5, 2, 6, 1, 4, 8};
+        Heap h2 = new Heap(11);
+        buildHeap(h2, b);
+        h2.display();
+
     }
 }
