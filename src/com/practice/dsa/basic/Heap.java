@@ -1,6 +1,7 @@
 package com.practice.dsa.basic;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class Heap {
     private int capacity;
@@ -108,6 +109,13 @@ public class Heap {
         }
     }
 
+    public void heapSort() {
+        int ct = this.count;
+        for (int i = 0; i < ct; i++) {
+            System.out.println(this.deleteMinimum());
+        }
+    }
+
 
     public static void main(String[] args) {
         Heap h = new Heap(10);
@@ -130,6 +138,22 @@ public class Heap {
         Heap h2 = new Heap(11);
         buildHeap(h2, b);
         h2.display();
+
+        h2.heapSort();
+
+        //JAVAs Priority Queue
+        PriorityQueue<Integer> pq = new PriorityQueue<>(10);
+        pq.add(10);
+        pq.add(2);
+        pq.add(9);
+        pq.add(4);
+        pq.add(6);
+        pq.add(5);
+        pq.add(1);
+        pq.add(3);
+        while(!pq.isEmpty()){
+            System.out.println(pq.poll());
+        }
 
     }
 }
