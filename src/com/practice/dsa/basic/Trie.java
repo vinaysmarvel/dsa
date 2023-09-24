@@ -40,7 +40,7 @@ public class Trie {
             Node x = this.root.map.get(s.charAt(0));
             int i = 0;
             while (x != null) {
-                if(i == s.length()-1 && x.isEndOfString) return true;
+                if (i == s.length() - 1 && x.isEndOfString) return true;
                 i++;
                 x = x.map.get(s.charAt(i));
             }

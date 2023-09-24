@@ -92,7 +92,7 @@ public class StringMatching {
 
     //O(NM) time , O(M) Space.. suited for large alphabet relative to the length of the patter. Still incomplete.
     //TODO need to complete this.
-    public static int boycemoore(String t, String p) {
+    public static int boyermoore(String t, String p) {
         if (t != null && p != null && t.length() >= p.length()) {
             int n = t.length(), m = p.length();
             Map<Character, Integer> map = computeBadMatchTable(p);
