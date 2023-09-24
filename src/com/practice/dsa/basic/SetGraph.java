@@ -43,16 +43,58 @@ public class SetGraph implements Graph {
         }
     }
 
+    //O(V+E) time O(V+E) space
+    public void dfs(int i) {
+        Set<Integer> vs = new HashSet<>();
+        java.util.Stack<Integer> s = new java.util.Stack<>();
+        s.push(i);
+        while (!s.isEmpty()) {
+            int x = s.pop();
+            System.out.println(x);
+            vs.add(x);
+            for (Integer y : edgeMapSet.get(x)) {
+                if (y != null && !s.contains(y) && !vs.contains(y)) {
+                    s.push(y);
+                }
+            }
+        }
+    }
+
+    //O(V+E) time O(V+E) space
+    public void bfs(int i) {
+        Set<Integer> vs = new HashSet<>();
+        java.util.Queue<Integer> q = new java.util.LinkedList<>();
+        q.offer(i);
+        while (!q.isEmpty()) {
+            int x = q.poll();
+            System.out.println(x);
+            vs.add(x);
+            for (Integer y : edgeMapSet.get(x)) {
+                if (y != null && !q.contains(y) && !vs.contains(y)) {
+                    q.offer(y);
+                }
+            }
+        }
+    }
+    //Question: is BFS or DFS better? : It depends on the problem nature.
+
     public static void main(String[] args) {
-        SetGraph g = new SetGraph(5);
+        SetGraph g = new SetGraph(8);
         g.addEdge(0, 1);
-        g.addEdge(0, 3);
+        g.addEdge(1, 6);
+        g.addEdge(1, 2);
         g.addEdge(2, 4);
-        g.addEdge(4, 3);
+        g.addEdge(2, 3);
+        g.addEdge(4, 7);
+        g.addEdge(4, 5);
+        g.addEdge(4, 6);
         g.display();
         System.out.println(g.isEdgeExists(1, 0));
-        g.removeEdge(0, 3);
+        g.removeEdge(6, 4);
         g.display();
-        System.out.println(g.isEdgeExists(0, 3));
+        System.out.println(g.isEdgeExists(6, 4));
+        g.dfs(0);
+        System.out.println("BFS:");
+        g.bfs(0);
     }
 }
