@@ -5,6 +5,7 @@ import java.util.*;
 public class SetGraph implements Graph {
     Map<Integer, Set<Integer>> edgeMapSet;
 
+    //O(V+E) space
     public SetGraph(int vertexCount) {
         edgeMapSet = new HashMap<>();
         for (int i = 0; i < vertexCount; i++) {
@@ -12,23 +13,27 @@ public class SetGraph implements Graph {
         }
     }
 
+    //O(1) time
     @Override
     public void addEdge(int i, int j) {
         edgeMapSet.get(i).add(j);
         edgeMapSet.get(j).add(i);
     }
 
+    //O(1) time
     @Override
     public void removeEdge(int i, int j) {
         edgeMapSet.get(i).remove(j);
         edgeMapSet.get(j).remove(i);
     }
 
+    //O(1) time
     @Override
     public boolean isEdgeExists(int i, int j) {
         return edgeMapSet.get(i).contains(j);
     }
 
+    //O(V+E) time
     @Override
     public void display() {
         int i = 0;
