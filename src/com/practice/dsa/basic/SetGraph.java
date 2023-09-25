@@ -1,11 +1,12 @@
 package com.practice.dsa.basic;
 
+
 import java.util.*;
 
 public class SetGraph implements Graph {
     Map<Integer, Set<Integer>> edgeMapSet;
 
-    //O(V+E) space
+    //O(V+E) space, this implementation doesn't allow to represent parallel edges since set doesn't allow duplicates
     public SetGraph(int vertexCount) {
         edgeMapSet = new HashMap<>();
         for (int i = 0; i < vertexCount; i++) {
@@ -77,6 +78,40 @@ public class SetGraph implements Graph {
         }
     }
     //Question: is BFS or DFS better? : It depends on the problem nature.
+
+    public void dijkstra(int i, int[] dist, int[][] w) {
+        Set<Integer> vs = new HashSet<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        pq.offer(new Pair(0, i));
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[i] = 0;
+        while (!pq.isEmpty()) {
+            Pair p = pq.poll();
+            vs.add(p.i);
+            for (int j : edgeMapSet.get(i)) {
+                int d = dist[j] + w[p.i][j];
+                if (d < dist[j] && !vs.contains(j)) {
+                    dist[j] = d;
+                    pq.offer(new Pair(dist[j], j));
+                }
+            }
+        }
+    }
+
+    private static class Pair implements Comparable {
+        int x;
+        int i;
+
+        Pair(int x, int i) {
+            this.i = i;
+            this.x = x;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            return x;
+        }
+    }
 
     public static void main(String[] args) {
         SetGraph g = new SetGraph(8);
