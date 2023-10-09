@@ -59,7 +59,8 @@ public class Sorting {
         }
     }
 
-    //O(N^2) time, not stable, in place
+    //O(N^2) time, not stable, in place, it is used when we know that elements are far apart for smaller lists and
+    // as a part of preprocessing for advanced better algorithms like quick sort.
     public void shell(int[] a) {
         if (a != null && a.length != 0) {
             int n = a.length;

@@ -22,7 +22,7 @@ public class StringMatching {
         }
     }
 
-    //O(M+N) time . O(1) space, This version works only with integers as of now.
+    //O(M+N) average time and O(M*N) worst case . O(1) space, This version works only with integers as of now.
     public static int rabinkarp(String t, String p) {
         if (t != null && p != null && t.length() >= p.length()) {
             int ht = hash(t, 0, p.length() - 1);
@@ -90,21 +90,19 @@ public class StringMatching {
         return f;
     }
 
-    //O(NM) time , O(M) Space.. suited for large alphabet relative to the length of the patter. Still incomplete.
-    //TODO need to complete this.
+    //O(NM) worst time , O(M) Space.. suited for large alphabet relative to the length of the pattern.
     public static int boyermoore(String t, String p) {
         if (t != null && p != null && t.length() >= p.length()) {
             int n = t.length(), m = p.length();
             Map<Character, Integer> map = computeBadMatchTable(p);
             for (int i = m - 1; i < n; ) {
-                for (int j = 0; j < m; j++) {
-                    if (t.charAt(i + j) == p.charAt(j)) {
-                        i++;
-                        j++;
-                    }
-                    if (j == m - 1) return i - j;
-                    //i =
+                int j = 0;
+                for (int k=m-1; j < m && t.charAt(i-j) == p.charAt(k);) {
+                    j++;
+                    k--;
                 }
+                if (j == m) return i-j+1;
+                i = i+ map.getOrDefault(t.charAt(i), m);
             }
         }
         return -1;
@@ -127,5 +125,6 @@ public class StringMatching {
         System.out.println(StringMatching.bruteforce(t, p));
         System.out.println(StringMatching.rabinkarp(t, p));
         System.out.println(StringMatching.kmp(t, p));
+        System.out.println(StringMatching.boyermoore(t, p));
     }
 }

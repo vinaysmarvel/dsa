@@ -14,6 +14,7 @@ public class WeightedQuickUnionPathCompression {
             size[i] = 1;
         }
     }
+
     //Log*N.. for all practical purposes , amortized time O(1)
     public int root(int i) {
         while (ar[i] != i) {
@@ -46,10 +47,10 @@ public class WeightedQuickUnionPathCompression {
 
     public static void main(String[] args) {
         WeightedQuickUnionPathCompression uf = new WeightedQuickUnionPathCompression(10);
-        uf.union(1,2);
-        uf.union(5,6);
-        uf.union(5,8);
-        System.out.println(uf.connected(1,6));
-        System.out.println(uf.connected(8,6));
+        uf.union(1, 2);
+        uf.union(5, 6);
+        uf.union(5, 8);
+        System.out.println(uf.connected(1, 6));
+        System.out.println(uf.connected(8, 6));
     }
 }

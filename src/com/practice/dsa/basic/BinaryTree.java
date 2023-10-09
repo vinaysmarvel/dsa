@@ -117,6 +117,8 @@ public class BinaryTree {
         b.preorderRecurvive(b.root);
         b.inorderRecurvive(b.root);
         b.postorderRecurvive(b.root);
+        b.levelOrderTraversal(b.root);
+        b.preorderIterative(b.root);
 
         //JAVA has Treeset and TreeMap
     }
